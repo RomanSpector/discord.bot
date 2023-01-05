@@ -1,1 +1,1 @@
-console.log("Hello Discrod bot qqqqqqqqqqqqqqqqq")
+import "./bot"
