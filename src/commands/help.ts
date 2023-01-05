@@ -1,6 +1,5 @@
 import { SlashCommandBuilder } from "@discordjs/builders"
-import { ChannelType, Client, CommandInteraction, InteractionType, TextChannel } from "discord.js"
-import { createTicket } from "../firebase"
+import { ChannelType, Client, CommandInteraction, TextChannel } from "discord.js"
 
 export const data = new SlashCommandBuilder()
     .setName("help")
@@ -35,8 +34,6 @@ export async function execute(interaction: CommandInteraction, clinet: Client) {
     }
 
     thread.send( `**User:** <@${user}>\n**Problem:** ${problemDescription}`)
-
-    await createTicket(thread.id, problemDescription)
 
     return interaction.reply({
         content: "Help is on the way!",
