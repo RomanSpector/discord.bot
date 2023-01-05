@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npx tsc",
-    "start": "node build/index.js",
+    "start": "npx tsc && node build/index.js",
     "dev": "concurrently \"npx tsc -w\" \"nodemon build/index.js\"",
     "format": "npx eslint ./src --fix",
     "deploy:commands": "npx tsc && node build/deploy-commands.js"
