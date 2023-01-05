@@ -51,6 +51,7 @@ function eventGuildMemberAddOrRemove(member: GuildMember | PartialGuildMember, c
             .setTimestamp()
 
         channel.send({ embeds: [embeds] })
+        channel.setName(`member-count-${channel.guild.memberCount}`)
     }
 }
 
