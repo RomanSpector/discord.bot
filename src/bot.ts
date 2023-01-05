@@ -13,6 +13,13 @@ import {
 } from 'discord.js';
 import config from './config.js';
 import * as commandModules from "./commands"
+import express from "express"
+
+const app = express()
+const port = 3000
+
+app.get('/', function (request, response) { response.send(`Монитор активен. Локальный адрес: http://localhost:${port}`); })
+app.listen(port, () => console.log())
 
 const commands = Object(commandModules)
 
