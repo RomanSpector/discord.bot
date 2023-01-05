@@ -805,10 +805,10 @@
   "resolved" "https://registry.npmjs.org/destroy/-/destroy-1.2.0.tgz"
   "version" "1.2.0"
 
-"discord-api-types@^0.37.20", "discord-api-types@^0.37.23":
-  "integrity" "sha512-aCwA2sWnL1zPQgTELkkMzQneuWyCXXUjZCUKswesiE6RDCfOfxAPXOHg6ZTlBA5layPSikGCBBRjyh8S3Wzd+A=="
-  "resolved" "https://registry.npmjs.org/discord-api-types/-/discord-api-types-0.37.25.tgz"
-  "version" "0.37.25"
+"discord-api-types@^0.37.20", "discord-api-types@^0.37.23", "discord-api-types@^0.37.26":
+  "integrity" "sha512-xZT6qosExE1ziBgD8vYU2R2aQQKOrSYWI6AFq5CiYhQtwR+Nkt9gPA3v9kHj2RFnsWDI2AbtESiQ4Rrhsa06+Q=="
+  "resolved" "https://registry.npmjs.org/discord-api-types/-/discord-api-types-0.37.26.tgz"
+  "version" "0.37.26"
 
 "discord.js@^14.7.1":
   "integrity" "sha512-1FECvqJJjjeYcjSm0IGMnPxLqja/pmG1B0W2l3lUY2Gi4KXiyTeQmU1IxWcbXHn2k+ytP587mMWqva2IA87EbA=="
