@@ -66,35 +66,6 @@ const client: Client = new Client({
 
 client.on("ready", () => {
     console.log("Discord 🤖 ready! ✨🎉💥")
-
-    const channel = client.channels.cache.get("761857830923665418")
-
-    if (!channel || channel.type !== ChannelType.GuildText) {
-        return
-    }
-
-    channel.send({
-        content: "Select your role by clicking on a button",
-        components: [
-            new ActionRowBuilder<ButtonBuilder>().setComponents(
-                new ButtonBuilder().setCustomId("PVPBOB").setLabel("PVP Bob").setStyle(ButtonStyle.Primary),
-                new ButtonBuilder().setCustomId("PVEDRAGON").setLabel("PVE Dragon").setStyle(ButtonStyle.Primary)),
-
-            new ActionRowBuilder<ButtonBuilder>().setComponents(
-                new ButtonBuilder().setCustomId("MAGE").setLabel("Mage").setStyle(ButtonStyle.Primary),
-                new ButtonBuilder().setCustomId("DRUID").setLabel("Druid").setStyle(ButtonStyle.Primary),
-                new ButtonBuilder().setCustomId("ROGUE").setLabel("Rogue").setStyle(ButtonStyle.Primary),
-                new ButtonBuilder().setCustomId("SHAMAN").setLabel("Shaman").setStyle(ButtonStyle.Primary),
-                new ButtonBuilder().setCustomId("HUTNER").setLabel("Hunter").setStyle(ButtonStyle.Primary)),
-
-            new ActionRowBuilder<ButtonBuilder>().setComponents(
-                new ButtonBuilder().setCustomId("PRIEST").setLabel("Priest").setStyle(ButtonStyle.Primary),
-                new ButtonBuilder().setCustomId("PALADIN").setLabel("Paladin").setStyle(ButtonStyle.Primary),
-                new ButtonBuilder().setCustomId("WARLOCK").setLabel("Warlock").setStyle(ButtonStyle.Primary),
-                new ButtonBuilder().setCustomId("WARRIOR").setLabel("Warrior").setStyle(ButtonStyle.Primary),
-                new ButtonBuilder().setCustomId("DEATHKNIGHT").setLabel("Death Knight").setStyle(ButtonStyle.Primary))
-        ]
-    })
 })
 
 client.on(Events.InteractionCreate, async interaction => {
