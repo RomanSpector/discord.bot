@@ -9,7 +9,10 @@ import {
     Guild,
     GuildMember,
     PartialGuildMember,
-    Partials
+    Partials,
+    Role,
+    CacheType,
+    ButtonInteraction
 } from 'discord.js';
 import config from './config.js';
 import * as commandModules from "./commands"
@@ -40,6 +43,31 @@ const ROLES: Record<string, string> = {
 
 function getLogsChannel(guild: Guild): GuildBasedChannel | undefined {
     return guild.channels.cache.find((channel) => channel.id == config.LOG_CHNNEL_ID)
+}
+
+function removeRoleTo(member: GuildMember, role: Role, interaction?: ButtonInteraction<CacheType>): void {
+    member.roles.remove(role).then((member) => {
+        interaction?.reply({
+            content: `The ${role} role was removed to your ${member}`,
+            ephemeral: true
+        })
+    })
+}
+
+function addRoleTo(member: GuildMember, role: Role, interaction?: ButtonInteraction<CacheType>): void {
+    member.roles.add(role).then((member) => {
+        interaction?.reply({
+            content: `The ${role} role was added to your ${member}`,
+            ephemeral: true
+        })
+    })
+}
+
+function removeOrAddRoleTo(member: GuildMember, role: Role, interaction: ButtonInteraction<CacheType>): void {
+    if (member.roles.cache.find(r => r.id === role.id))
+        removeRoleTo(member, role, interaction)
+    else
+        addRoleTo(member, role, interaction)
 }
 
 function eventGuildMemberAddOrRemove(member: GuildMember | PartialGuildMember, color: ColorResolvable): void {
@@ -83,25 +111,8 @@ client.on(Events.InteractionCreate, async interaction => {
         const role = interaction.guild!.roles.cache.get(ROLES[interaction.customId.toUpperCase()])
         const member = interaction.guild!.members.cache.get(interaction.user.id)
 
-        if (!member || !role) {
-            return;
-        }
-
-        if (member.roles.cache.find(r => r.id === role.id)) {
-            member.roles.remove(role).then((member) => {
-                interaction.reply({
-                    content: `The ${role} role was removed to your ${member}`,
-                    ephemeral: true
-                })
-            })
-        }
-        else {
-            member.roles.add(role).then((member) => {
-                interaction.reply({
-                    content: `The ${role} role was added to your ${member}`,
-                    ephemeral: true
-                })
-            })
+        if (member && role) {
+            return removeOrAddRoleTo(member, role, interaction);
         }
     }
 })
