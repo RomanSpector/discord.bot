@@ -19,7 +19,7 @@ const app = express()
 const port = 3000
 
 app.get('/', function (request, response) { response.send(`Монитор активен. Локальный адрес: http://localhost:${port}`); })
-app.listen(port, () => console.log())
+app.listen(port, () => console.log("Listen for connections."))
 
 const commands = Object(commandModules)
 
