@@ -19,7 +19,7 @@ import * as commandModules from "./commands"
 import express from "express"
 
 const app = express()
-const port = 3000
+const port = config.PORT
 
 app.get('/', function (request, response) { response.send(`Монитор активен. Локальный адрес: http://localhost:${port}`); })
 app.listen(port, () => console.log("Listen for connections."))
