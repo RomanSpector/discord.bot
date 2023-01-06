@@ -1,5 +1,5 @@
-import { ButtonBuilder, SlashCommandBuilder } from "@discordjs/builders"
-import { CommandInteraction, EmbedBuilder, ActionRowBuilder, ButtonStyle } from "discord.js"
+import { ButtonBuilder, SlashCommandBuilder, EmbedBuilder, ActionRowBuilder } from "@discordjs/builders"
+import { CommandInteraction, ButtonStyle } from "discord.js"
 
 export const data = new SlashCommandBuilder()
     .setName("lib")
@@ -13,7 +13,7 @@ const button = new ButtonBuilder()
 
 const embeds = new EmbedBuilder()
     .setTitle("Libs")
-    .setColor("#13ffff")
+    .setColor(0x13ffff)
     .setImage("https://cdn-fifmh.nitrocdn.com/EGioCxfDvAOMyzZnrMzMzxXqCRnQlPIW/assets/static/optimized/rev-aa4e56b/wp-content/uploads/2022/07/How-To-Install-WoW-Addons.jpg")
     .setURL("https://yadi.sk/d/9wxHrNwl_13LbA")
     .setDescription("Библиотеки для некоторых моих ВАшек, чтобы они конкретно отображали информацию. Для установки нужно просто извлеч архив в папку с аддонами и перезапустить игру.")
