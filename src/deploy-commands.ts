@@ -6,7 +6,7 @@ import * as commandModules from "./commands"
 type Command = {
     data: unknown
 }
- 
+
 const commands = []
 
 for (const module of Object.values<Command>(commandModules)) {
