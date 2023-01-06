@@ -73,7 +73,7 @@ function removeOrAddRoleTo(member: GuildMember, role: Role, interaction: ButtonI
 function eventGuildMemberAddOrRemove(member: GuildMember | PartialGuildMember, color: ColorResolvable): void {
     const channel = getLogsChannel(member.guild);
     if (channel && channel.type === ChannelType.GuildText) {
-        let embeds = new EmbedBuilder()
+        const embeds = new EmbedBuilder()
             .setAuthor({ name: `${member.user.tag} just joined!`, iconURL: member.user.avatarURL() || "" })
             .setColor(color)
             .setTimestamp()
@@ -107,9 +107,9 @@ client.on(Events.InteractionCreate, async interaction => {
         commands[commandName].execute(interaction, client)
     }
 
-    if (interaction.isButton()) {
-        const role = interaction.guild!.roles.cache.get(ROLES[interaction.customId.toUpperCase()])
-        const member = interaction.guild!.members.cache.get(interaction.user.id)
+    if (interaction.isButton() && interaction.guild) {
+        const role = interaction.guild.roles.cache.get(ROLES[interaction.customId.toUpperCase()])
+        const member = interaction.guild.members.cache.get(interaction.user.id)
 
         if (member && role) {
             return removeOrAddRoleTo(member, role, interaction);
