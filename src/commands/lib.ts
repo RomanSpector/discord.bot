@@ -11,7 +11,7 @@ const button = new ButtonBuilder()
     .setStyle(ButtonStyle.Link)
     .setEmoji({ name: `🔃` })
 
-const embeds = new EmbedBuilder()
+const embed = new EmbedBuilder()
     .setTitle("Libs")
     .setColor(0x13ffff)
     .setImage("https://cdn-fifmh.nitrocdn.com/EGioCxfDvAOMyzZnrMzMzxXqCRnQlPIW/assets/static/optimized/rev-aa4e56b/wp-content/uploads/2022/07/How-To-Install-WoW-Addons.jpg")
@@ -21,5 +21,5 @@ const embeds = new EmbedBuilder()
 const actionRow = new ActionRowBuilder<ButtonBuilder>().addComponents(button)
 
 export async function execute(interaction: CommandInteraction) {
-    return interaction.reply({ embeds: [embeds], components: [actionRow] })
+    return interaction.reply({ embeds: [embed], components: [actionRow] })
 }

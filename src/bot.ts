@@ -21,9 +21,6 @@ import express from "express"
 const app = express()
 const port = config.PORT
 
-app.get('/', function (request, response) { response.send(`Монитор активен. Локальный адрес: http://localhost:${port}`); })
-app.listen(port, () => console.log("Listen for connections."))
-
 const commands = Object(commandModules)
 
 const ROLES: Record<string, string> = {
@@ -42,7 +39,7 @@ const ROLES: Record<string, string> = {
 }
 
 function getLogsChannel(guild: Guild): GuildBasedChannel | undefined {
-    return guild.channels.cache.find((channel) => channel.id == config.LOG_CHNNEL_ID)
+    return guild.channels.cache.find((channel) => channel.id == config.LOG_CHANNEL_ID)
 }
 
 function removeRoleTo(member: GuildMember, role: Role, interaction?: ButtonInteraction<CacheType>): void {
@@ -64,7 +61,7 @@ function addRoleTo(member: GuildMember, role: Role, interaction?: ButtonInteract
 }
 
 function removeOrAddRoleTo(member: GuildMember, role: Role, interaction: ButtonInteraction<CacheType>): void {
-    if (member.roles.cache.find(r => r.id === role.id))
+    if (member.roles.cache.find(({ id }) => id === role.id))
         removeRoleTo(member, role, interaction)
     else
         addRoleTo(member, role, interaction)
@@ -73,10 +70,13 @@ function removeOrAddRoleTo(member: GuildMember, role: Role, interaction: ButtonI
 function eventGuildMemberAddOrRemove(member: GuildMember | PartialGuildMember, color: ColorResolvable): void {
     const channel = getLogsChannel(member.guild);
     if (channel && channel.type === ChannelType.GuildText) {
-        const embeds = new EmbedBuilder()
-            .setAuthor({ name: `${member.user.tag} just joined!`, iconURL: member.user.avatarURL() || "" })
-            .setColor(color)
-            .setTimestamp()
+        const embeds = new EmbedBuilder({
+            timestamp: Date(),
+            author: {
+                name: `${member.user.tag} jusst ${(color === "Green") ? "join" : "leave"}!`,
+                iconURL: member.user.avatarURL() || "https://cdn.siasat.com/wp-content/uploads/2021/05/Discord.jpg"
+            }
+        }).setColor(color)
 
         channel.send({ embeds: [embeds] })
         channel.setName(`member-count-${channel.guild.memberCount}`)
@@ -121,3 +121,6 @@ client.on(Events.GuildMemberAdd, (member) => { eventGuildMemberAddOrRemove(membe
 client.on(Events.GuildMemberRemove, (member) => { eventGuildMemberAddOrRemove(member, "Red") })
 
 client.login(config.DISCORD_TOKEN)
+
+app.get('/', function (request, response) { response.send(`Монитор активен. Локальный адрес: http://localhost:${port}`); })
+app.listen(port, () => console.log("Listen for connections."))

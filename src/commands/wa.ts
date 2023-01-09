@@ -12,7 +12,7 @@ const button = new ButtonBuilder({
     emoji: { name: `🔃` },
 })
 
-const embeds = new EmbedBuilder({
+const embed = new EmbedBuilder({
     title: "WeakAuras",
     color: 0x13ffff,
     image: { url: "https://i.imgur.com/wwbxeCG.jpeg" },
@@ -23,5 +23,5 @@ const embeds = new EmbedBuilder({
 const actionRow = new ActionRowBuilder<ButtonBuilder>().addComponents(button)
 
 export async function execute(interaction: CommandInteraction) {
-    return interaction.reply({ embeds: [embeds], components: [actionRow] })
+    return interaction.reply({ embeds: [embed], components: [actionRow] })
 }

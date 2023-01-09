@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "@discordjs/builders"
-import { ChannelType, Client, CommandInteraction, TextChannel } from "discord.js"
+import { Client, CommandInteraction, TextChannel } from "discord.js"
 
 export const data = new SlashCommandBuilder()
     .setName("help")
@@ -17,7 +17,7 @@ export async function execute(interaction: CommandInteraction, clinet: Client) {
     }
 
     const channel = await clinet.channels.fetch(interaction.channelId)
-    if (!channel || channel.type !== ChannelType.GuildText || !interaction.isChatInputCommand()) {
+    if (!channel || !interaction.isChatInputCommand()) {
         return
     }
 
@@ -33,7 +33,7 @@ export async function execute(interaction: CommandInteraction, clinet: Client) {
         return
     }
 
-    thread.send( `**User:** <@${user}>\n**Problem:** ${problemDescription}`)
+    thread.send(`**User:** <@${user}>\n**Problem:** ${problemDescription}`)
 
     return interaction.reply({
         content: "Help is on the way!",
